@@ -1,17 +1,13 @@
-import Header from "./header";
-
 import Formulario from "./formulario";
-import Resultados from "./resultado";
+import Resultado from "./resultado";
 
 
-
-export default function SearchPage({productos, carga}){
+export default function SearchPage(props){
   
-  setTimeout(()=>carga(),2000)
-
     return <div>
-        <Header />
-        <Formulario />
-        <Resultados productos={productos}/>
-     </div>
+    
+     <Formulario />
+     <Resultado productos={props.productos}/>
+    
+    </div>
 }
