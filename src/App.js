@@ -1,26 +1,33 @@
 import * as React from 'react';
-import { Routes, Route } from "react-router-dom";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductoId from './productoID';
-import {mockdata} from './constants/products'
+
 import SearchPage from './searchpage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { mockdata } from './constants/products';
 
 
 export default function App() {
-  let productos = mockdata;
+  const [productos, setProductos]= useState(null);
+ 
+  function cargaProductos(){
+    setProductos(mockdata.products);
+
+  }
+ 
   return (
     <div className='App'>
+    <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SearchPage />} />
-          <Route path="/productos/:id" element={<ProductoId productos={productos} />} />
+          <Route path="/" element={<SearchPage productos={productos} carga={cargaProductos}/>} />
+          <Route path="/productos/:id" element={<ProductoId productos={productos}/>}  />           
         </Routes>
+    </BrowserRouter>
     </div>
     
   );
-  /* <h1>Mis Juegos</h1>
-    <nav style={{ borderBottom: 'solid 1px', paddingBottom: '1rem' }}>
-      <Link to="/">Home</Link> |{' '}
-      <Link to="/producctos/peoductoid">Producto</Link> |{' '}
-    </nav> */
+  
   
 }
