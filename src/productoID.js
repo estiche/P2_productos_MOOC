@@ -2,12 +2,12 @@ import { useParams } from "react-router-dom";
 
 
 
-export default function ProductoId(props){
+export default function ProductoId(){
 let {id}= useParams();
 
 
     if(props.productos){
-        return <p>PRODUCTO: {JSON.stringify(props.productos[id])}</p> 
+        return <p>PRODUCTO: {JSON.stringify(producto[id])}</p> 
     }else{
         props.carga();
         
