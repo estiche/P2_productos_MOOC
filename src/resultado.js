@@ -1,11 +1,14 @@
 import Spinner from 'react-bootstrap/Spinner';
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
-
+/*<div class="d-flex justify-content-around">...</div>  */
 export default function Resultado(props){
   const tarjeta={
-    "border": "4px solid black",
-     "padding": "5px"
+    "border": "2px solid grey",
+     "padding": "5px",
+     "margin" : "5px",
+     "width": '180px' ,
+     'flexShrink': 0
   }
     
     function inicio() {
@@ -13,25 +16,32 @@ export default function Resultado(props){
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
-        );
+        )
       }
-
-    return <div>
+      
+    
+    return <div className='container'>
         { props.productos? 
-        <div>{props.productos.map((e,i)=>
+        <div className="d-flex flex-row mt-3 justify-content-center flex-wrap">      
+         
+        {props.productos.map((e,i)=>
           
-                <Card style={{ width: '18rem' , height : '20rem', border : '2px solid black', padding: '5px'}} key={i}>
-                <Link to={"/productos/" + i} ><Card.Img variant="top"  src={e.thumbnail} height="100"/></Link>
+                <Card style={tarjeta} key={i}>
+                <Link to={"/productos/" + i} >
+                  <Card.Img variant="top"  src={e.thumbnail} height="100"/>
+                </Link>
                   <Card.Body>
-                    <Card.Title>{e.title}</Card.Title>
-                    <Card.Text>{e.price}</Card.Text>
+                    <Card.Text style={{'height':'50%', 'overflow':'hidden'}}>{e.title}</Card.Text>
+                    <Card.Text style={{'textAlign':'start'}}>{e.price} Euros</Card.Text>
                   </Card.Body>
                 </Card>
-           )}
+            )}
+            </div>
+           
+          : 
+            <div>{inicio()}</div>
+        }
         </div>
-        : 
-        <div>{inicio()}</div>}<div/>
-        </div>
-    
+           
     }
-  
+   
