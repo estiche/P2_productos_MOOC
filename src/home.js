@@ -5,18 +5,18 @@ import Header from './header';
 import { useState } from "react";
 
 export default function Home(props){
-        const[filtro, setFiltro]= useState(null);
-        const [categoria, setCategoria]= useState(null);
-        
+        const [filtro, setFiltro]= useState(null);
+        const [categorias, setCategorias]= useState(null);
+        const [datos, setDatos]= useState(props.data);
 
         function resultado(x){
    
-                let salida = props.data.filter(e=>RegExp(x, 'i').test(JSON.stringify(e)));
-                setFiltro(salida)
-                console.log(salida.length)
+                setFiltro(datos.filter(e=>RegExp(x, 'i').test(JSON.stringify(e))));
+                
               } 
+        
         function categor(datos){
-                setCategoria(datos.reduce((acum,e)=>{
+                setCategorias(datos.reduce((acum,e)=>{
             
                   let item= e.category
               
@@ -26,7 +26,10 @@ export default function Home(props){
                   return acum;
                 },[]));
               }  
-         
+         function cambia_categoria(c){
+                console.log(c)
+                setDatos(props.data.filter((e)=>e.category === c))
+         }
 
  if(props.error){
         return<div>
@@ -34,11 +37,11 @@ export default function Home(props){
         </div>    
         }
    else{
-        if(props.data && (categoria===null)){categor(props.data)};
+        if(props.data && (categorias === null)){categor(props.data)};
         return <div>
                  <Header />
-                <Formulario resultado={resultado} categorias={categoria} />
-                {filtro? <Resultado productos={filtro}/> : <Resultado productos={props.data}/>} 
+                {<Formulario resultado={resultado} categorias={categorias} carga_categoria={cambia_categoria} />}
+                {filtro? <Resultado productos={filtro}/> : <Resultado productos={datos}/>} 
         </div>
         
         }

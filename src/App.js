@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState} from 'react';
 import CONFIG from "./config/config";
 import {mockdata} from "./constants/products";
+import Espera from './espera';
 
 
 export default function App() {
@@ -34,19 +35,20 @@ export default function App() {
       setErr({"cod":e.cod , "message":"la conexion fallo"})
       }  
   }else{
-    setTimeout(()=>setProductos(mockdata.products),2000);;
+    setProductos(mockdata.products);
     }
   
 }
 
-ObtenerDatos();
 
   return (
     <div className='App'>
     
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home  data={productos} error={err} productos={setProductos}/>} />
+          <Route path="/" element={
+            productos?<Home  data={productos} error={err} productos={setProductos}/>
+             :<Espera carga={ObtenerDatos} />}/>
           <Route path="/productos/:id" element={<Location  data={productos} error={err}/>}  /> */         
         </Routes>
     </BrowserRouter>
