@@ -46,7 +46,7 @@ ObtenerDatos();
     
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home  data={productos} error={err}/>} />
+          <Route path="/" element={<Home  data={productos} error={err} productos={setProductos}/>} />
           <Route path="/productos/:id" element={<Location  data={productos} error={err}/>}  /> */         
         </Routes>
     </BrowserRouter>

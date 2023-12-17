@@ -8,9 +8,12 @@ import { useState } from 'react';
 
 export default function Formulario(props){
 
-  const[busca, setBusca] = useState('')
-  
+  const[busca, setBusca] = useState('');
+  const[categoria, setCategoria]= useState('All');
 
+console.log(categoria)
+  
+  
     return <div>
     <div style={{'height':'5rem','padding':'1rem 0px 1rem 0px'}}>
    
@@ -35,7 +38,8 @@ export default function Formulario(props){
      
     </div>
     <Form.Select aria-label="Default select example" 
-      style={{'width':'20rem','margin':'auto'}} >
+      style={{'width':'20rem','margin':'auto'}} 
+      onChange={(e)=>setCategoria(e.target.value)}>
         <option>All</option>
         {props.categorias && props.categorias.map((e)=><option value={e}>{e}</option>)}
     </Form.Select>
