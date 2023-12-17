@@ -16,13 +16,10 @@ export default function App() {
  
   const [productos, setProductos]= useState(null);
   const [err, setErr]= useState(null);
-
   
-
-
   async function  ObtenerDatos(){
     console.log('PASO')
-  if(CONFIG.use_server){
+    if(CONFIG.use_server){
     try{
             const response = await fetch(`${CONFIG.server_url}`);
             const datos = await response.json();
@@ -31,15 +28,17 @@ export default function App() {
             }else{
               setErr(datos);
               setProductos(null);
-            }
+              }
     }catch(e){
       setProductos(null);
       setErr({"cod":e.cod , "message":"la conexion fallo"})
-    }  
+      }  
   }else{
-   setTimeout(()=>setProductos(mockdata.products),2000);;
-  }
+    setTimeout(()=>setProductos(mockdata.products),2000);;
+    }
+  
 }
+
 ObtenerDatos();
 
   return (
@@ -56,4 +55,4 @@ ObtenerDatos();
   );         
   
   
-}
+  }

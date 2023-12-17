@@ -27,7 +27,6 @@ export default function Location(props) {
     <p>NOMBRE: {props.data[id].title}</p>
     <p>PRECIO: {props.data[id].price}</p>
     <p>DESCRIPCION: {props.data[id].description}</p>
-    <p>STOCK: {props.data[id].stock}</p>
     <p>CATREGORIA: {props.data[id].category}</p>
     <p>STOCK:  {props.data[id].stock}</p>
     </div>
