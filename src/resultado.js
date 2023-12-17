@@ -27,7 +27,7 @@ export default function Resultado(props){
         {props.productos.map((e,i)=>
           
                 <Card style={tarjeta} key={i}>
-                <Link to={"/productos/" + i} >
+                <Link to={"/productos/" + (e.id - 1)} >
                   <Card.Img variant="top"  src={e.thumbnail} height="100"/>
                 </Link>
                   <Card.Body>

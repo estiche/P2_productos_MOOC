@@ -17,12 +17,7 @@ export default function App() {
   const [productos, setProductos]= useState(null);
   const [err, setErr]= useState(null);
 
-  function resultado(x){
-   
-    let salida = productos.filter(e=>RegExp(x, 'i').test(JSON.stringify(e)));
-    setProductos(salida)
-    
-  }
+  
 
 
   async function  ObtenerDatos(){
@@ -52,7 +47,7 @@ ObtenerDatos();
     
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home  data={productos} error={err} resultado={resultado}/>} />
+          <Route path="/" element={<Home  data={productos} error={err}/>} />
           <Route path="/productos/:id" element={<Location  data={productos} error={err}/>}  /> */         
         </Routes>
     </BrowserRouter>
