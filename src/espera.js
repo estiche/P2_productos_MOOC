@@ -1,16 +1,12 @@
-import Header from "./header";
 import Spinner from 'react-bootstrap/Spinner';
+import Header from './header';
 
+export default function Espera(){
 
-export default function Espera(props){
-    
-    setTimeout(() => {
-        props.carga() 
-    }, 2000);
     return<div>
-    <Header></Header>
-    <Spinner animation="border" role="status">
+        <Header/>
+        <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>
-    </Spinner>
-    </div>
+        </Spinner>
+        </div>
 }

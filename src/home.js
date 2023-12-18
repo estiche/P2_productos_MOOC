@@ -4,44 +4,35 @@ import Error from "./error";
 import Header from './header';
 import { useState } from "react";
 
+
 export default function Home(props){
-        const [filtro, setFiltro]= useState(null);
-        const [categorias, setCategorias]= useState(null);
-        const [datos, setDatos]= useState(props.data);
+       
+        const [datos, setDatos]= useState(props.productos);
 
-        function resultado(x){
-   
-                setFiltro(datos.filter(e=>RegExp(x, 'i').test(JSON.stringify(e))));
-                
-              } 
-        
-        function categor(datos){
-                setCategorias(datos.reduce((acum,e)=>{
-            
-                  let item= e.category
-              
-                  if(!acum.includes(item)){
-                    acum.push(item);
-                  }
-                  return acum;
-                },[]));
-              }  
-         function cambia_categoria(c){
-                console.log(c)
-                setDatos(props.data.filter((e)=>e.category === c))
-         }
-
+        function filtra(x){
+          console.log('datos filtrado= ' + x[0] + ',' + x[1])
+          let cat;
+          if(x[1] === 'All'){
+            cat = props.productos;
+          }else{
+            cat = props.productos.filter((e)=>e.category === x[1])
+          }
+          
+          setDatos(cat.filter(e=>RegExp(x[0], 'i').test(JSON.stringify(e))));
+          
+        } 
+           
  if(props.error){
         return<div>
                 <Error />
         </div>    
         }
    else{
-        if(props.data && (categorias === null)){categor(props.data)};
+        
         return <div>
                  <Header />
-                {<Formulario resultado={resultado} categorias={categorias} carga_categoria={cambia_categoria} />}
-                {filtro? <Resultado productos={filtro}/> : <Resultado productos={datos}/>} 
+                <Formulario filtro={filtra} categorias={props.categorias} />
+                <Resultado data={datos}/>
         </div>
         
         }
