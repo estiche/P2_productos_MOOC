@@ -10,7 +10,7 @@ export default function Home(props){
         const [datos, setDatos]= useState(props.productos);
 
         function filtra(x){
-          console.log('datos filtrado= ' + x[0] + ',' + x[1])
+          
           let cat;
           if(x[1] === 'All'){
             cat = props.productos;
