@@ -1,5 +1,5 @@
 import Spinner from 'react-bootstrap/Spinner';
-import Header from './header';
+import Header from './Header';
 
 export default function Espera(){
 

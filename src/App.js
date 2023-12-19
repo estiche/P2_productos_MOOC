@@ -2,11 +2,11 @@ import * as React from 'react';
 import "./App_copy.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Location from './Location';
-import Home from './home';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState, useEffect} from 'react';
+import Home from './SearchPage';
+import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import CONFIG from "./config/config";
-import {mockdata} from "./constants/products";
+import { mockdata } from "./constants/products";
 import Espera from './espera';
 
 export default function App() {
@@ -23,6 +23,7 @@ export default function App() {
       return acum;
     },[]);
   }
+function carga(datos){setProductos(datos.products)}
     
 useEffect(()=>{
   async function cargaDatos(){
@@ -30,8 +31,8 @@ useEffect(()=>{
       try{
         const response = await fetch(`${CONFIG.server_url}`);
         const datos = await response.json();
-        if(response.status === 200){  
-            setProductos(datos);
+        if(response.status === 200){
+          carga(datos);
         }else{
             setErr(datos);
             setProductos(null);
@@ -49,16 +50,16 @@ cargaDatos();
 
   return (
     <div className='App'>
-    <BrowserRouter>
+    
         <Routes>
           <Route path="/" element={productos?
             <Home  productos={productos} error={err} categorias={categorias}/>
           :
-          <Espera/>}
-          />
-          <Route path="/productos/:id" element={<Location  data={productos} error={err}/>}/>        
+          <Espera/>}/>
+
+          <Route path="/productos/:id" element={<Location data={productos} error={err}/>}/>        
         </Routes>
-    </BrowserRouter>
+    
     </div> 
   );         
   }

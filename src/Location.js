@@ -1,5 +1,5 @@
 import {useParams, useLocation} from "react-router-dom";
-import Header from "./header";
+import Header from "./Header";
 
 export default function Location(props) {
   let { id } = useParams();

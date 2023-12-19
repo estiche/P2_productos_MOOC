@@ -1,7 +1,7 @@
 import Formulario from "./formulario";
 import Resultado from "./resultado";
 import Error from "./error";
-import Header from './header';
+import Header from './Header';
 import { useState } from "react";
 
 
