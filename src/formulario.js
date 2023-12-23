@@ -4,26 +4,29 @@ import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
 
 export default function Formulario(props){
-
+ 
   const[busca, setBusca] = useState('');
   const[categoria, setCategoria] = useState('All');
-    useEffect(()=>{
-      props.filtro([busca, categoria])
-    },[categoria])
+  
+  useEffect(()=>{
+    props.categoria(categoria)
+  },[categoria])
 
-    return <div>
+  console.log('p :'+ props.categorias)
+
+  return <div>
       <div style={{'height':'5rem','padding':'1rem 0px 1rem 0px'}}>
         <div style={{'position':'absolute','width':'100%'}}>
           <h2 id="catalogo">Buscador de catálogo</h2>
         </div>
         <div style={{'zIndex':'1','position':'relative','float':'right'}}>
-          <Button variant="outline-secondary" id="buscador" onClick={()=>props.filtro([busca, categoria])}>Buscar</Button>
+          <Button variant="outline-secondary" id="buscador" className='BUTTON' onClick={()=>props.titulo(busca)}>Buscar</Button>
         </div>
         <InputGroup className="mb-3" style={{'width':'20rem','float':'right'}} >
-          <Form.Control type="text" id="filtro" value={busca} onChange={(e)=>setBusca(e.target.value)} />
+          <Form.Control type="text" id="filtro" className='INPUT' value={busca} onChange={(e)=>setBusca(e.target.value)} />
         </InputGroup>
       </div>
-      <Form.Select aria-label="Default select example" name="categoria"
+      <Form.Select id="selector" aria-label="Default select example" name="categoria"
               style={{'width':'20rem','margin':'auto'}} 
               onChange={(e)=>{setCategoria(e.target.value);}}>
         <option value='All'>All</option>

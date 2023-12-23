@@ -1,40 +1,47 @@
 import Formulario from "./formulario";
-import Resultado from "./resultado";
-import Error from "./error";
+import Lista from "./lista";
+import Espera from './espera';
 import Header from './Header';
 import { useState } from "react";
 
+let categorias; 
+let productos; 
 
-export default function Home(props){
-       
-        const [datos, setDatos]= useState(props.productos);
+export default function SearchPage(props){
+    
+const [datos, setDatos]= useState(null);
 
-        function filtra(x){
-          
-          let cat;
-          if(x[1] === 'All'){
-            cat = props.productos;
-          }else{
-            cat = props.productos.filter((e)=>e.category === x[1])
-          }
-          
-          setDatos(cat.filter(e=>RegExp(x[0], 'i').test(JSON.stringify(e))));
-          
-        } 
-           
- if(props.error){
-        return<div>
-                <Error />
-        </div>    
-        }
-   else{
+if(!datos){
+  async function carga(){
+    productos = await props.products();
+    categorias = productos.reduce((acum,e)=>{
+                  let item= e.category
+                  if(!acum.includes(item)){
+                          acum.push(item);
+                      }
+                  return acum;},[]);
+    console.log(categorias)
+    setDatos(productos)
+  }
+  carga();
+}        
+
+function carga_Title(t){
+
+  setDatos( productos.filter(e=>e.title === t))
+  
+  }
+  
+function carga_Cat(category){      
+  if(categorias === 'All'){
+    setDatos(productos);
+  }else{
+    setDatos(productos.filter((e)=>e.category === category))
+  }
+} 
+  
+  
+  return <div>{datos ?<div><Formulario categoria={carga_Cat} titulo={carga_Title} categorias={categorias}/><Lista data={datos}/></div> : <Espera/>}</div>
         
-        return <div>
-                 <Header />
-                <Formulario filtro={filtra} categorias={props.categorias} />
-                <Resultado data={datos}/>
-        </div>
-        
-        }
+  }
 
-}

@@ -5,6 +5,7 @@ export default function Location(props) {
   let { id } = useParams();
   
 	const location = useLocation(); 
+  
 
 	return (<div>
   <Header id={id}/>	
@@ -21,7 +22,7 @@ export default function Location(props) {
 		alt="thumbnail"
 	  />
     <div style={{'textAlign':'left'}}>
-    <p>NOMBRE: {props.data[id].title}</p>
+    <p id="titulo">NOMBRE: {props.data[id].title}</p>
     <p>PRECIO: {props.data[id].price}</p>
     <p>DESCRIPCION: {props.data[id].description}</p>
     <p>CATREGORIA: {props.data[id].category}</p>
