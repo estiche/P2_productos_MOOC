@@ -10,14 +10,11 @@ const tarjeta={
 }
 
 export default function Lista(props){
-
- 
-  
     return <div className='container'>
         <div id="productosresultados" className="d-flex flex-row mt-3 justify-content-center flex-wrap">      
           {(props.data.length > 0)? props.data.map((e,i)=>
             <Card style={tarjeta} key={i} className="unproducto">
-            <Link to={"/products/" + i} >
+            <Link to={"/products/" + (e.id - 1)} >
               <Card.Img variant="top"  src={e.thumbnail} height="100"/>
             </Link>
               <Card.Body>

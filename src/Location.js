@@ -1,7 +1,5 @@
 import {useParams, useLocation} from "react-router-dom";
 import Header from "./Header";
-import { useState } from "react";
-import Espera from "./espera";
 
 export default function Location(props) {
   let { id } = useParams();
@@ -12,7 +10,7 @@ export default function Location(props) {
     <Header id={id}/>	
     <div className='container' > 
       <div id="divlocation" >Location es: {location.pathname}</div>
-	    <div>ProductId es:<div id="divproductid">{id}</div></div>
+	    <div>ProductId es:<span id="divproductid">{id}</span></div>
 	    <div>
         <div style={{'marginTop':'40px'}}>
 	        <img style={{'float':'left','marginRight':'20px'}} height="300" width="450" src={producto.thumbnail} alt="thumbnail"/>

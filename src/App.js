@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Location from './Location';
 import SearchPage from './SearchPage';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CONFIG from "./config/config";
 import { mockdata } from "./constants/products";
 import NoMatch from './nomach';
@@ -14,8 +14,7 @@ export default function App() {
   
   const [err, setErr]= useState(null);
   const [productos, setProductos]= useState(null);
-  const [categorias,setCategorias]=useState(null)
-
+  
   if(!productos){cargaDatos()};
   async function cargaDatos(){
       if(CONFIG.use_server){
@@ -39,27 +38,15 @@ export default function App() {
 
 return (
     <div className='App'>
-
+    {productos?
         <Routes>
-          <Route path="/" element={productos?
-            <SearchPage theproducts={productos} error={err} />
-          :
-            <Espera></Espera>}
-          />
-          
-          <Route path="/products/:id" element={productos?
-            <Location theproducts={productos} error={err}/>
-          :
-            <Espera></Espera>}
-          />
-          
-          <Route path='/rutanoexiste' element={productos?
-            <NoMatch />
-          :
-            <Espera></Espera>}
-          />
+          <Route path="/" element=<SearchPage theproducts={productos} error={err} />/>
+          <Route path="/products/:id" element=<Location theproducts={productos} error={err}/>/>
+          <Route path='/rutanoexiste' element=<NoMatch />/>
         </Routes>
-    
+      :
+      <Espera></Espera>
+    }
     </div> 
   );         
   }
