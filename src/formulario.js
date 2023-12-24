@@ -9,18 +9,21 @@ export default function Formulario(props){
   const[categoria, setCategoria] = useState('All');
   
   useEffect(()=>{
-    props.categoria(categoria)
-  },[categoria])
+    props.cargaC(categoria)
+  },[categoria]) 
 
-  console.log('p :'+ props.categorias)
+  let categorias = props.productos.reduce((acum,e)=>{
+    let item= e.category
+    if(!acum.includes(item)){acum.push(item)}
+    return acum;},[])
 
-  return <div>
+   return <div>
       <div style={{'height':'5rem','padding':'1rem 0px 1rem 0px'}}>
         <div style={{'position':'absolute','width':'100%'}}>
           <h2 id="catalogo">Buscador de catálogo</h2>
         </div>
         <div style={{'zIndex':'1','position':'relative','float':'right'}}>
-          <Button variant="outline-secondary" id="buscador" className='BUTTON' onClick={()=>props.titulo(busca)}>Buscar</Button>
+          <Button variant="outline-secondary" id="buscador" className='BUTTON' onClick={()=>props.cargaT(busca)}>Buscar</Button>
         </div>
         <InputGroup className="mb-3" style={{'width':'20rem','float':'right'}} >
           <Form.Control type="text" id="filtro" className='INPUT' value={busca} onChange={(e)=>setBusca(e.target.value)} />
@@ -30,8 +33,10 @@ export default function Formulario(props){
               style={{'width':'20rem','margin':'auto'}} 
               onChange={(e)=>{setCategoria(e.target.value);}}>
         <option value='All'>All</option>
-        {props.categorias.map((e,i)=><option value={e} key={i}>{e}</option>)}
-      </Form.Select>
+        { categorias.map((e,i)=><option value={e} key={i}>{e}</option>) }
+  
+      </Form.Select> 
+      
     </div>
     
     }

@@ -5,7 +5,7 @@ export default function Espera(){
 
     return<div>
         <Header/>
-        <Spinner animation="border" role="status" id="loading" clasname="spinner">
+        <Spinner animation="border" role="status" id="loading" className="spinner">
             <span className="visually-hidden">Loading...</span>
         </Spinner>
         </div>

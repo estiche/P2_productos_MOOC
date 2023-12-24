@@ -8,43 +8,56 @@ import { useState, useEffect } from 'react';
 import CONFIG from "./config/config";
 import { mockdata } from "./constants/products";
 import NoMatch from './nomach';
+import Espera from './espera';
 
 export default function App() {
   
   const [err, setErr]= useState(null);
-    
+  const [productos, setProductos]= useState(null);
+  const [categorias,setCategorias]=useState(null)
+
+  if(!productos){cargaDatos()};
   async function cargaDatos(){
-    let productos;
       if(CONFIG.use_server){
         try{
-          const response = await fetch(`${CONFIG.server_url}`)
-          const datos = await response.json();
-        if(response.status === 200){
-          productos=datos;
-        }else{
+            const response = await fetch(`${CONFIG.server_url}`)
+            const datos = await response.json();
+          if(response.status === 200){
+            setProductos(datos.products);
+          }else{
             setErr(datos);
-        }
-      }catch(e){
-        setErr({"cod":e.cod , "message":"la conexion fallo"})
-      }  
-    }else{
-      setTimeout(()=>
-        productos=mockdata,CONFIG.loading_timeout_ms);
+          }
+        }catch(e){
+          setErr({"cod":e.cod , "message":"la conexion fallo"})
+        }  
+      }else{
+      setTimeout(()=>setProductos(mockdata.products),CONFIG.loading_timeout_ms)
     }
-    return productos.products;
+    
 };
 
 
 return (
     <div className='App'>
-    
-        <Routes>
-          <Route path="/" element=<SearchPage products={cargaDatos} error={err} /> />
 
-          <Route path="/productos/:id" element=<Location products={cargaDatos} 
-          error={err}/>/>
+        <Routes>
+          <Route path="/" element={productos?
+            <SearchPage theproducts={productos} error={err} />
+          :
+            <Espera></Espera>}
+          />
           
-          <Route path='/rutanoexiste' element=<NoMatch />/>
+          <Route path="/products/:id" element={productos?
+            <Location theproducts={productos} error={err}/>
+          :
+            <Espera></Espera>}
+          />
+          
+          <Route path='/rutanoexiste' element={productos?
+            <NoMatch />
+          :
+            <Espera></Espera>}
+          />
         </Routes>
     
     </div> 

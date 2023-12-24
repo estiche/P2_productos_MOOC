@@ -1,47 +1,47 @@
 import Formulario from "./formulario";
+import Header from "./Header";
 import Lista from "./lista";
 import Espera from './espera';
-import Header from './Header';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+/*setFiltro(datos.filter(e=>RegExp(x, 'i').test(JSON.stringify(e))))*/
 
-let categorias; 
-let productos; 
 
 export default function SearchPage(props){
-    
-const [datos, setDatos]= useState(null);
+   
+const [datos, setDatos]= useState(props.theproducts);
 
-if(!datos){
-  async function carga(){
-    productos = await props.products();
-    categorias = productos.reduce((acum,e)=>{
-                  let item= e.category
-                  if(!acum.includes(item)){
-                          acum.push(item);
-                      }
-                  return acum;},[]);
-    console.log(categorias)
-    setDatos(productos)
-  }
-  carga();
-}        
-
-function carga_Title(t){
-
-  setDatos( productos.filter(e=>e.title === t))
+/*
   
-  }
+
   
+   
+function carga_categorias(){
+  setCategorias(productos.reduce((acum,e)=>{
+    let item= e.category
+    if(!acum.includes(item)){acum.push(item)}
+    return acum;},[]))
+  }
+*/
 function carga_Cat(category){      
-  if(categorias === 'All'){
-    setDatos(productos);
+  if(category === 'All'){
+    setDatos(props.theproducts);
   }else{
-    setDatos(productos.filter((e)=>e.category === category))
+    setDatos(props.theproducts.filter((e)=>e.category === category))
   }
 } 
-  
-  
-  return <div>{datos ?<div><Formulario categoria={carga_Cat} titulo={carga_Title} categorias={categorias}/><Lista data={datos}/></div> : <Espera/>}</div>
+function carga_Title(t){
+  setDatos( props.theproducts.filter(e=>RegExp(t, 'i').test(JSON.stringify(e.title)))) 
+}
+
+  return <div>
+    
+    {props.theproducts && <div>
+        <Header/>
+        <Formulario cargaT={carga_Title} cargaC={carga_Cat} productos={props.theproducts}/>
+        <Lista data={datos}/>
+    </div>
+    }
+    </div>
         
   }
 
