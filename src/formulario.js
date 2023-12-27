@@ -1,17 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Formulario(props){
  
   const[busca, setBusca] = useState('');
-  const[categoria, setCategoria] = useState('All');
   
-  useEffect((props)=>{
-    props.cargaC(categoria)
-  },[categoria]) 
-
   let categorias = props.productos.reduce((acum,e)=>{
     let item= e.category
     if(!acum.includes(item)){acum.push(item)}
@@ -37,7 +32,7 @@ export default function Formulario(props){
             <Form.Select id="selector" aria-label="Default select example"
               name="categoria"
               style={{'width':'300px'}} 
-              onChange={(e)=>{setCategoria(e.target.value);}}>
+              onChange={(e)=>{props.cargaC(e.target.value);}}>
               <option value='All'>All</option>
               { categorias.map((e,i)=><option value={e} key={i}>{e}</option>) }
             </Form.Select> 

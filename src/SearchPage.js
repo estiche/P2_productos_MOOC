@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function SearchPage(props){
 const [datos, setDatos]= useState(props.theproducts);
 
+
 function carga_Cat(category){      
   if(category === 'All'){
     setDatos(props.theproducts);
