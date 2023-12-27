@@ -17,7 +17,7 @@ export default function Formulario(props){
     if(!acum.includes(item)){acum.push(item)}
     return acum;},[])
 
-   return <div style={{'width':'100%','height':'80px', 'margin-bottom':'20px'}}>
+   return <div style={{'width':'100%','height':'80px', 'marginBottom':'20px'}}>
 
           
           <div id="catalogo1" style={{'width':'100%','position':'absolute'}}>
@@ -25,9 +25,8 @@ export default function Formulario(props){
           </div>
       
           <div id="input">
-            <InputGroup className="mb-3" id="filtro" 
-              style={{'width':'300px','position':'absolute','right':'10px'}}>
-              <Form.Control type="text"  className='INPUT' value={busca} onChange={(e)=>setBusca(e.target.value)}/>
+            <InputGroup className="mb-3" style={{'width':'300px','position':'absolute','right':'10px'}}>
+              <Form.Control type="text" id="filtro" className='INPUT' value={busca} onChange={(e)=>setBusca(e.target.value)}/>
               <Button variant="outline-secondary" id="buscador" className='BUTTON' onClick={()=>props.cargaT(busca)}>
                 Button
               </Button>
