@@ -8,7 +8,7 @@ export default function Formulario(props){
   const[busca, setBusca] = useState('');
   const[categoria, setCategoria] = useState('All');
   
-  useEffect(()=>{
+  useEffect((props)=>{
     props.cargaC(categoria)
   },[categoria]) 
 
