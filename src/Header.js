@@ -6,7 +6,7 @@ export default function Header(props){
 
     return <div id="cabecera">
     <img className="logo" src="http://localhost:3000/logo192.png" alt="logo"></img>
-    <h3 className="mensaje">Alejandro Sanchez</h3>
+    <h3 className="mensaje">Alejandro Sanchez Lopez</h3>
     { props.id && <Link to="/" style={{'position':'absolute','right':'10px'}}> 
         <Button variant="secondary" id="volver">ATRAS</Button> 
     </Link> }
