@@ -17,12 +17,13 @@ function carga_Title(t){
   setDatos( props.theproducts.filter(e=>RegExp(t, 'i').test(JSON.stringify(e.title)))) 
 }
 
-  return <>{props.theproducts && <div>
+  return <div>
+  {props.theproducts && <div>
         <Header/>
         <Formulario cargaT={carga_Title} cargaC={carga_Cat} productos={props.theproducts}/>
         <Lista data={datos}/>
     </div>
-    }
-    </>
+  }
+    </div>
   }
 
