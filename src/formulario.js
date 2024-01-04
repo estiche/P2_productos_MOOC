@@ -12,7 +12,7 @@ export default function Formulario(props){
     if(!acum.includes(item)){acum.push(item)}
     return acum;},[])
 
-   return <div style={{'width':'100%','height':'80px', 'marginBottom':'20px'}}>
+   return <div style={{'width':'100%','height':'120px', 'padding':'20px', 'marginBottom':'20px'}}>
 
           
           <div id="catalogo1" style={{'width':'100%','position':'absolute'}}>
