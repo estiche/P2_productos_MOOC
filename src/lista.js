@@ -19,7 +19,7 @@ export default function Lista(props){
             </Link>
               <Card.Body>
                 <Card.Text style={{'height':'50%', 'overflow':'hidden'}}>{e.title}</Card.Text>
-                <Card.Text style={{'textAlign':'start'}}>{e.price} Euros</Card.Text>
+                <Card.Text style={{'textAlign':'start'}}>{e.price}&euro;</Card.Text>
               </Card.Body>
             </Card>
           ):
